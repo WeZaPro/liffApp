@@ -6,13 +6,13 @@
       name="viewport"
       content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover"
     />
-    <title>ONLINE SABUYME LIFFAPP</title>
+    <title>My LIFF app</title>
     <link rel="stylesheet" href="css/style.css" media="all" />
   </head>
   <body>
     <p id="os"><b>OS:</b></p>
     <p id="language"><b>Language:</b></p>
-    <p id="version"><b>Versioned:</b></p>
+    <p id="version"><b>Version:</b></p>
     <p id="isInClient"><b>isInClient:</b></p>
     <p id="accessToken"><b>AccessToken:</b></p>
     <img id="pictureUrl" />
@@ -39,13 +39,13 @@
     <button id="btnLogOut" onclick="logOut()">Log Out</button>
     <button id="btnClose" onclick="closed()">Close</button>
 
-    <!-- <script src="js/vconsole.min.js"></script> -->
-    <!-- <script>
-    var vConsole = new VConsole()
-    console.log("Hello World!")
-  </script> -->
+    <script src="js/vconsole.min.js"></script>
+    <script>
+      var vConsole = new VConsole();
+      console.log("Hello World!");
+    </script>
 
-    <!-- <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script> -->
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
     <script>
       function createUniversalLink() {}
 
@@ -69,12 +69,25 @@
 
       async function getUserProfile() {}
 
-      function getEnvironment() {}
+      function getEnvironment() {
+        document.getElementById("os").append(liff.getOS());
+        document.getElementById("language").append(liff.getLanguage());
+        document.getElementById("version").append(liff.getVersion());
+        document.getElementById("accessToken").append(liff.getAccessToken());
+        document.getElementById("isClient").append(liff.isClient());
+        if (liff.isClient) {
+          document.getElementById("btnLogOut").style.display = "none";
+        } else {
+          document.getElementById("btnMsg").style.display = "none";
+          document.getElementById("btnScanCode").style.display = "none";
+          document.getElementById("btnClose").style.display = "none";
+        }
+      }
 
       async function main() {
-        alert("LIFF APP");
+        // alert("LIFF APP");
         await liff.init({ liffId: "1657499945-ZxdXoKm4" });
-        // getEnvironment()
+        getEnvironment();
         // getUserProfile()
         // getContext()
         // getFriendship()
